@@ -1,6 +1,6 @@
 # Through Time
 
-A simulator that aims to simulate a world based on [Dark's](https://www.netflix.com/title/80100172) concept of time travel.
+A simulator that aims to simulate a world based on [Dark's](https://www.netflix.com/title/80100172) concept of time travel. It is not mandatory for you to have watched Dark. Understanding of the below mentioned concepts is sufficient.
 
 ## Premises and constraints
 
