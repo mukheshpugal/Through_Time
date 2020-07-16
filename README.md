@@ -9,7 +9,12 @@ For the sake of simplicity, let us consider a finite two-dimensional space where
 
 ### Qualities of beings
 
-Each being has a set of inputs and performs actions based on those inputs. In this case the input could be the status of each grid. *For example, a 100 element array of numbers, one element for each grid where 0 is for empty, 1 for green, 2 for blue etc.* Based on this, decisions are made at each time step by a definitive process given to us before simulation. <br/>
+Each being gets a set of inputs and performs actions based on those inputs. Generally the input would be some representation of the entire state of the world. For example, the input could be a 100 element array of numbers, one element for each grid where 0 is for empty, 1 for green, 2 for blue etc.
+<p align="center"><img src="assets/brain.png" /><br/>The 4 x 100 matrix is the brain of the being.</p>
+As shown above, the input vector is multiplied by a matrix inherent to the being. This results in a smaller dimensional vector based on which the decision is made.
+Now, this is just one way of decision making. The important point to note is that at any time, states of all the beings are visible to each of the beings.
+<br/>
+<br/>
 Each being has a fixed life time after which it will cease to exist.
 
 ### The time portal
@@ -39,7 +44,7 @@ Please feel free to post issues for suggestions / for a better understanding of 
 ## Proposed method
 
 The proposed method is to construct a tree of possible next moves considering the possibility of time travel in the future. That is, for each frame, we also consider that someone, 10 frames to the future, travels to the past. To resolve this, we first move beings according to their will as normal. We then place 3 more parallel frames *(3 in this case because we have 3 individuals)* on the same step where each frame has an additional one of the three beings on the top left. This additional being is 10 frames older than the respective normal-time being.
-<p align="center"><img src="assets/tree.png" /><br/>A state branching to possible states in the next time step.</p>
+<p align="center"><img src="assets/tree.png" draggable="false" /><br/>A state branching to possible states in the next time step.</p>
 After the 10th frame, we start looking at the portal, checking if someone travels through it. For example, for all of the possible frames in the 15th time step, if there is no case where blue reaches the portal, we immediately discard the frame in the 5th time step where we accounted for blue's travel to the past. We also discard all of it's child frames.
 
 > **Note**: All the numbers in the above examples are variables and can be anything for a given world. 10 frames could instead be 33 frames :wink:
