@@ -23,6 +23,7 @@ Whenever a being lands on the black hole, it has two more choices. It can travel
 
 Whenever someone travels to the future for 10 frames, the being dissapears on the next time step and reappears after 10 time steps with the same age.
 <br/>
+<br/>
 Whenever someone travels to the past for 10 frames, their presence is mandatory in the (n - 10)th frame. That is, in the (n - 10)th frame, there are two beings who are the same, but one, 10 frames older than the other. The future causes the present.
 
 #### Destination post travel
@@ -34,3 +35,12 @@ In order to avoid ambiguities regarding the physical destination, after travel, 
 Our aim is to simulate this 10x10 world for a given initial configuration for a given amount of time steps. The concept of time travel introduces a lot of degrees of freedom. There are a lot of solutions for a given initial configuration. We should be abled to simulate at least one of them if not all. Remember, the brains of the beings are unaltered at any given time and each decision can be accutarely predicted given the current state of the world.
 
 Please feel free to post issues for suggestions / for a better understanding of the concept.
+
+## Proposed method
+
+The proposed method is to construct a tree of possible next moves considering the possibility of time travel in the future. That is, for each frame, we also consider that someone, 10 frames to the future, travels to the past. To resolve this, we first move beings according to their will as normal. We then place 3 more parallel frames *(3 in this case because we have 3 individuals)* on the same step where each frame has an additional one of the three beings on the top left. This additional being is 10 frames older than the respective normal-time being.
+<br/>
+<br/>
+After the 10th frame, we start looking at the portal, checking if someone travels through it. For example, for all of the possible frames in the 15th time step, if there is no case where blue reaches the portal, we immediately discard the frame in the 5th time step where we accounted for blue's travel to the past. We also discard all of it's child frames.
+
+> **Note**: All the numbers in the above examples are variables and can be anything for a given world. 10 frames could instead be 33 frames :wink:
