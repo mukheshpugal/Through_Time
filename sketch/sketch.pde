@@ -5,7 +5,11 @@ void setup() {
   size(303, 303);
   strokeWeight(2);
   agents.add(new Agent(color(255, 0, 0), 0, 0));
+  agents.add(new Agent(color(255, 0, 0), 0, 0));
+  agents.add(new Agent(color(255, 0, 0), 0, 0));
   agents.add(new Agent(color(0, 255, 0), 0, 0));
+  agents.add(new Agent(color(0, 255, 0), 0, 0));
+  agents.add(new Agent(color(0, 0, 255), 0, 0));
   agents.add(new Agent(color(0, 0, 255), 0, 0));
 }
 
