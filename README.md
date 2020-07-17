@@ -66,4 +66,4 @@ In this case, there could be a path where a being from the future influences the
 > Important: If a being is alone in the world in a particular time step, he never travels through time in the next step.
 
 ##### Case 2
-Another reason this approach would fail is that once someone hits the portal, history has to rewritten. If rewritten, there is a chance that the being never hits the portal in the first place. So you'll have to update this by dropping a branch. This will happen back and forth resulting in an endless loop.
+Another reason this approach would fail is that once someone hits the portal, history has to be rewritten. If rewritten, there is a chance that the being never hits the portal in the first place. So you'll have to update this by dropping a branch. This will happen back and forth resulting in an endless loop.
