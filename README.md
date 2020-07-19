@@ -62,7 +62,7 @@ There are a few valid cases which will not be considered if we branch only when 
 - His brain is such that when he's alone, he would never reach the black hole.
 - If someone else is present with him, he might reach the black hole.
 
-In this case, there could be a path where a being from the future influences the being in present time to get into the hole. Note that the being entering the hole in the first place is caused by the travelled being. If we branch only when someone hits the portal, we will miss this path.
+In this case, there could be a path where a being from the future influences the being in present time to get into the hole. Note that the being entering the hole in the first place is caused by the travelled being. If we branch only when someone hits the portal, we will miss this path. See [bootstrap paradox](https://en.wikipedia.org/wiki/Causal_loop).
 > Important: If a being is alone in the world in a particular time step, he never travels through time in the next step.
 
 ##### Case 2
