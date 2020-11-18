@@ -14,6 +14,7 @@ Each being gets a set of inputs and performs actions based on those inputs. Gene
 As shown above, the input vector is multiplied by a matrix inherent to the being. This results in a smaller dimensional vector based on which the decision is made.
 Now, this is just one way of decision making. The important point to note is that at any time, states of all the beings are visible to each of the beings.
 <br/>
+If the above doesn't make sense to you, just think that their behaviour doesn't change with time and can be predicted accurately if positions of every being is known.
 <br/>
 Each being has a fixed life time after which it will cease to exist.
 
@@ -27,7 +28,6 @@ Whenever a being lands on the black hole, it has two more choices. It can travel
 #### Time travel mechanics
 
 Whenever someone travels to the future for 10 frames, the being dissapears on the next time step and reappears after 10 time steps with the same age.
-<br/>
 <br/>
 Whenever someone travels to the past for 10 frames, their presence is mandatory in the (n - 10)th frame. That is, in the (n - 10)th frame, there are two beings who are the same, but one, 10 frames older than the other. The future causes the present.
 
