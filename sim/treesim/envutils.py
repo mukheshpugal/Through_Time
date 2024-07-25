@@ -7,6 +7,38 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
 import PIL.Image as Image
+import os
+
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+import pygame
+
+
+def state_to_image(state, actors, size=600, as_array=False):
+    surface = pygame.surface.Surface((size, size))
+    surface.fill((255, 255, 255))
+
+    # Draw grid lines
+    for i in range(state.shape[0] + 1):
+        pygame.draw.line(surface, (200, 200, 200), (0, i * size // state.shape[0]), (size, i * size // state.shape[0]), 3)
+    for i in range(state.shape[1] + 1):
+        pygame.draw.line(surface, (200, 200, 200), (i * size // state.shape[1], 0), (i * size // state.shape[1], size), 3)
+
+    # Draw portal
+    pygame.draw.circle(surface, (200, 200, 200), (size - size // state.shape[1] // 2, size - size // state.shape[0] // 2), 0.6 * size // state.shape[1] // 2)
+    pygame.draw.circle(surface, (0, 0, 0), (size - size // state.shape[1] // 2, size - size // state.shape[0] // 2), 0.5 * size // state.shape[1] // 2)
+
+    # Draw actors
+    for i in range(state.shape[0]):
+        for j in range(state.shape[1]):
+            id = state[i, j]
+            if id:
+                center = ((j + 0.5) * size / state.shape[1], (i + 0.5) * size / state.shape[0])
+                square_size = size * 0.8 // state.shape[1]
+                # Draw a rounded square
+                pygame.draw.rect(surface, actors[id].color, (center[0] - square_size / 2, center[1] - square_size / 2, square_size, square_size), border_radius=int(square_size / 5))
+    if as_array:
+        return pygame.surfarray.array3d(surface)
+    return Image.fromarray(pygame.surfarray.array3d(surface))
 
 
 def stepper(state: np.array, actors: dict, verbose: bool = False):
@@ -68,7 +100,7 @@ def plot_tree(root):
             pos = {}
         pos[node] = (x, y)
         for i, child in zip(np.linspace(-1, 1, len(node.children)), node.children):
-            child_x = x + (0 if len(node.children) == 1 else i) / (layer + 1)
+            child_x = x + (0 if len(node.children) == 1 else i)  / 10#/ (layer + 1)
             child_y = y - 1
             G.add_edge(node, child)
             pos = add_edges(child, G, pos=pos, x=child_x, y=child_y, layer=layer + 1)
@@ -84,23 +116,23 @@ def plot_tree(root):
         xf, yf = ax.transData.transform(pos[node])
         xa, ya = fig.transFigure.inverted().transform((xf, yf))
         a = plt.axes([xa - icon_center, ya - icon_center, icon_size, icon_size])
-        a.imshow(get_image(node.state, 10))
+        a.imshow(get_image(node.state, 5))
         a.axis("off")
     ax.set_title("Timeline tree")
     ax.axis("off")
     plt.show()
 
 
-def make_movie(tree, size=5):
+def make_movie(tree, actors):
     import cv2
 
     for i, node in enumerate(tree.get_leaves()):
         fourcc = cv2.VideoWriter_fourcc(*"mp4v")
         Path("outputs").mkdir(exist_ok=True)
-        out = cv2.VideoWriter(f"outputs/path_{i+1}.mp4", fourcc, 1, (10 * size + 1, 10 * size + 1))
+        out = cv2.VideoWriter(f"outputs/path_{i+1}.mp4", fourcc, 1, (600, 600))
         images = []
         while node is not None:
-            img = get_image(node.state, size, as_array=True)
+            img = state_to_image(node.state, actors, as_array=True)
             img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
             images.append(img)
             node = node.parent
